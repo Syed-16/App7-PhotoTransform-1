@@ -100,10 +100,13 @@
           /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
           /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-          /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
-          
-          
-          
+         // code for modified, blue version of image //
+         let imageData = context.getImageData(0, 0, 600, 500);
+         for (var i = 0; i < imageData.data.length; i += 4) { // image will go through all RBG values (+4 because of transparency)
+                 imageData.data[i] = 0;     // Red value will equal 0 so red does not show in modified image
+                 imageData.data[i + 1] = 0; // Green value will equal 0 so green does not show in modified image
+               }
+               newContext.putImageData(imageData, 0, 0); //displays the blue, modified version of image on second canvas
           
         } // end of img.onload
         
@@ -135,21 +138,21 @@
       <div id="messageDisplayArea"></div>
       
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      <canvas id="blueCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+      <canvas id="blueCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas> <!-- code for second canvas-->
       <script> /* This script initiates the canvas and puts the text on the canvas "myCanvas" */
         var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext("2d");
-         context.font = '20pt Arial';
-         context.fillStyle = "black";
-         context.fillText("Original image will go here", 10, 20);
+        var context = canvas.getContext("2d"); // provides canvas context
+         context.font = '20pt Arial'; // font of text
+         context.fillStyle = "black"; // color of text
+         context.fillText("Original image will go here", 10, 20); // states where image will appear
       </script>
 
      <script>  /* This script initiates the canvas and puts the text on the second canvas "blueCanvas" */
        var bluecanvas = document.getElementById('blueCanvas');
-       var bluecontext = canvas.getContext("2d");
-         context.font = '20pt Arial';
-         context.fillStyle = "black";
-         context.fillText("Blue intensities of image will go here", 110, 20);
+       var bluecontext = canvas.getContext("2d"); // provides canvas context
+         bluecontext.font = '20pt Arial'; // font of text
+         bluecontext.fillStyle = "black"; // color of text
+         bluecontext.fillText("Modified will go here", 10, 20); // states where blue version of image will appear
      </script>
 
     </div> <!-- /content -->
